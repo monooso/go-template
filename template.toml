@@ -1,0 +1,59 @@
+name = "Go template"
+description = "A template to create a new Go project without the donkey work."
+url = "https://github.com/monooso/go-template"
+
+kickstart_version = 1
+
+ignore = [
+  ".gitignore",
+  "scripts",
+  "LICENSE",
+  "README.md"
+]
+
+cleanup = [
+  {name = "license", value = "None", paths = ["{{project_name}}/LICENSE"]},
+  {name = "use_mise", value = false, paths = ["{{project_name}}/mise.toml"]}
+]
+
+post_gen_hooks = [
+  { name = "finish setup", path = "scripts/finish_setup.sh" }
+]
+
+[[variables]]
+name = "project_name"
+default = "go_project"
+prompt = "What is the name of this project?"
+validation = "^([a-zA-Z][a-zA-Z0-9_-]+)$"
+
+[[variables]]
+name = "description"
+default = "Don't you wish your Golang was hot like me."
+prompt = "What is the elevator pitch for this project?"
+
+[[variables]]
+name = "github_username"
+default = "monooso"
+prompt = "What is your GitHub username?"
+
+[[variables]]
+name = "go_version"
+default = "1.25.5"
+prompt = "Which Go version are you using?"
+
+[[variables]]
+name = "use_mise"
+default = true
+prompt = "Do you use Mise to manage your Go version?"
+
+[[variables]]
+name = "license"
+default = "AGPLv3"
+prompt = "Which open-source license do you want to use?"
+choices = [
+  "AGPLv3",
+  "BSD",
+  "GPLv3",
+  "MIT",
+  "None",
+]
